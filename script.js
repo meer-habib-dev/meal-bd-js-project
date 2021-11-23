@@ -21,10 +21,10 @@ function searchMeal(e) {
         fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 resultHeading.innerHTML = `<h2>Search results for <span style="color:pink">${term}</span>:</h2>`;
 
-                if (data.meals === null) {
+                if (data.meals.length === -1) {
                     resultHeading.innerHTML = '<p>There is no search results! Try again later</p> '
                 } else {
                         mealsEl.innerHTML = data.meals.map(meal =>
@@ -50,7 +50,7 @@ function getMealById(mealId) {
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data);
+            // console.log(data);
             const meal = data.meals[0];
 
             addMealToDOM(meal);
@@ -114,7 +114,7 @@ mealsEl.addEventListener('click', e => {
     });
     if (mealInfo) {
         const mealId = mealInfo.getAttribute('data-mealId');
-        console.log(mealId);
+        // console.log(mealId);
         getMealById(mealId);
   }  
 })
